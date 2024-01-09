@@ -1,33 +1,29 @@
-package org.example.front;
-
-import org.example.Main;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ListPadPanel extends JPanel implements ActionListener {
+public class ListMobilePanel extends JPanel implements ActionListener {
     private Main win;
-    private JList<String> padList;
+    private JList<String> mobileList;
     private JButton backBtn;
 
-    public ListPadPanel(Main win) {
+    public ListMobilePanel(Main win) {
         this.win = win;
         setLayout(null);
         setBackground(new Color(255, 255, 255));
 
-        JLabel title = new JLabel("패드");
+        JLabel title = new JLabel("모바일 기기");
         title.setFont(new Font("SanSerif", Font.BOLD, 20));
         title.setHorizontalAlignment(JLabel.CENTER);
         title.setBounds(100, 20, 300, 30);
         add(title);
 
-        // 패드 목록 JList
-        String[] pads = {"아이패드 에어 4", "갤럭시 탭 s9", "레노버 탭 m10"};
-        padList = new JList<>(pads);
-        padList.setFont(new Font("SanSerif", Font.PLAIN, 16));
-        JScrollPane scrollPane = new JScrollPane(padList);
+        // 모바일 기기 목록 JList
+        String[] mobiles = {"갤럭시 s23", "아이폰 15", "갤럭시 a24"};
+        mobileList = new JList<>(mobiles);
+        mobileList.setFont(new Font("SanSerif", Font.PLAIN, 16));
+        JScrollPane scrollPane = new JScrollPane(mobileList);
         scrollPane.setBounds(100, 120, 300, 100);
         add(scrollPane);
 
@@ -36,8 +32,8 @@ public class ListPadPanel extends JPanel implements ActionListener {
         selectBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String selectedpad = padList.getSelectedValue();
-                // 선택된 패드에 대한 처리
+                String selectedmobile = mobileList.getSelectedValue();
+                // 선택된 모바일 기기에 대한 처리
             }
         });
         add(selectBtn);

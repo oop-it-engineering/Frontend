@@ -1,7 +1,3 @@
-package org.example.front;
-
-import org.example.Main;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;

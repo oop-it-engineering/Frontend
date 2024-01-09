@@ -1,7 +1,3 @@
-package org.example.front;
-
-import org.example.Main;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -11,7 +7,6 @@ public class ListOtherPanel extends JPanel implements ActionListener {
     private Main win;
     private JList<String> otherList;
     private JButton backBtn;
-
 
     public ListOtherPanel(Main win) {
         this.win = win;

@@ -1,34 +1,29 @@
-package org.example.front;
-
-import org.example.Main;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ListMobilePanel extends JPanel implements ActionListener {
+public class ListLaptopPanel extends JPanel implements ActionListener {
     private Main win;
-    private JList<String> mobileList;
+    private JList<String> laptopList;
     private JButton backBtn;
 
-
-    public ListMobilePanel(Main win) {
+    public ListLaptopPanel(Main win) {
         this.win = win;
         setLayout(null);
         setBackground(new Color(255, 255, 255));
 
-        JLabel title = new JLabel("모바일 기기");
+        JLabel title = new JLabel("랩탑");
         title.setFont(new Font("SanSerif", Font.BOLD, 20));
         title.setHorizontalAlignment(JLabel.CENTER);
         title.setBounds(100, 20, 300, 30);
         add(title);
 
-        // 모바일 기기 목록 JList
-        String[] mobiles = {"갤럭시 s23", "아이폰 15", "갤럭시 a24"};
-        mobileList = new JList<>(mobiles);
-        mobileList.setFont(new Font("SanSerif", Font.PLAIN, 16));
-        JScrollPane scrollPane = new JScrollPane(mobileList);
+        // 랩탑 목록 JList
+        String[] laptops = {"삼성 갤럭시 북 4", "LG 그램", "맥북 에어"};
+        laptopList = new JList<>(laptops);
+        laptopList.setFont(new Font("SanSerif", Font.PLAIN, 16));
+        JScrollPane scrollPane = new JScrollPane(laptopList);
         scrollPane.setBounds(100, 120, 300, 100);
         add(scrollPane);
 
@@ -37,8 +32,8 @@ public class ListMobilePanel extends JPanel implements ActionListener {
         selectBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String selectedmobile = mobileList.getSelectedValue();
-                // 선택된 모바일 기기에 대한 처리
+                String selectedLaptop = laptopList.getSelectedValue();
+                // 선택된 랩탑에 대한 처리
             }
         });
         add(selectBtn);

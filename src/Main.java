@@ -1,6 +1,3 @@
-package org.example;
-
-import org.example.front.*;
 import javax.swing.*;
 
 public class Main extends JFrame {
@@ -57,7 +54,7 @@ public class Main extends JFrame {
         win.listOtherPanel = new ListOtherPanel(win);
         win.add(win.loginPanel);
         win.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        win.setSize(500, 650);
+        win.setSize(960, 700);
         win.setVisible(true);
         win.setResizable(false);
     }
