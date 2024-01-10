@@ -64,7 +64,6 @@ public class Main extends JFrame {
         Main win = new Main();
         win.setTitle("IT공학과 기기 대여 시스템");
 
-
         // 예약 패널 초기화
         win.reservationLaptop = new ReservationLaptop("눈송이", win);
         win.reservationLaptop2 = new ReservationLaptop2("눈송이", win);
@@ -85,9 +84,9 @@ public class Main extends JFrame {
         win.listOtherPanel = new ListOtherPanel(win);
 
         win.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        win.setSize(860, 700);
+        win.setSize(860, 740); // 여기 크기 수정된 거 확인해주세요!
         win.setVisible(true);
-        win.setResizable(false);
+        win.setResizable(true); // 최대화 가능하게 설정
     }
 
 }

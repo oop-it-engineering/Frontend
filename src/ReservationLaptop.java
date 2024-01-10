@@ -10,7 +10,7 @@ public class ReservationLaptop extends JPanel implements ActionListener {
     private JLabel reservationStatusLabel;
     private JLabel reservationAvailabilityLabel;
     //private JFrame previousFrame;
-    private JButton backButton;
+    private JButton backButton, homeButton;
 
     public ReservationLaptop(String userName, Main win) {
         this.win = win;
@@ -22,19 +22,28 @@ public class ReservationLaptop extends JPanel implements ActionListener {
         topPanel.setBorder(new EmptyBorder(10, 20, 10, 20));
         topPanel.setBackground(new Color(41, 57, 80));
 
-        // 백 버튼
+        // 버튼 패널 (왼쪽애 백과 홈 모두 두기 위해)
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        buttonPanel.setOpaque(false);
+
+        // backbutton
         ImageIcon backIconOriginal = new ImageIcon(getClass().getResource("/images/back.png"));
         Image backImageScaled = backIconOriginal.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
         ImageIcon backIconScaled = new ImageIcon(backImageScaled);
         backButton = new JButton(backIconScaled);
-//        backButton.addActionListener(e -> {
-//            if (previousFrame != null) {
-//                previousFrame.setVisible(true);
-//            }
-//            this.dispose();
-//        });
         backButton.addActionListener(this);
-        topPanel.add(backButton, BorderLayout.WEST);
+        buttonPanel.add(backButton);
+
+        // homebutton
+        ImageIcon homeIconOriginal = new ImageIcon(getClass().getResource("/images/home.png"));
+        Image homeImageScaled = homeIconOriginal.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+        ImageIcon homeIconScaled = new ImageIcon(homeImageScaled);
+        homeButton = new JButton(homeIconScaled);
+        homeButton.addActionListener(this);
+        buttonPanel.add(homeButton);
+
+        topPanel.add(buttonPanel, BorderLayout.WEST);
+
 
         // 가운데 제목 라벨
         JLabel titleLabel = new JLabel("예약 페이지", SwingConstants.CENTER);
@@ -106,10 +115,6 @@ public class ReservationLaptop extends JPanel implements ActionListener {
     }
 
    // 규정 확인하기 버튼 눌렀을 때 Rules Dialog 보여주는 메서드 (규정확인버튼 액션리스너에 연결)
-//    private void showRulesDialog() {
-//        Rules dialog = new Rules(this);
-//        dialog.setVisible(true);
-//    }
    private void showRulesDialog() {
        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
        Rules dialog = new Rules(frame);
@@ -182,6 +187,8 @@ public class ReservationLaptop extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == backButton) {
             win.change("장비 선택 화면으로");
+        } else if (e.getSource() == homeButton) {
+            win.change("장비 선택 화면으로"); // 나중에 합치고 대여/문의 화면으로 돌아가게 만들기
         }
     }
 

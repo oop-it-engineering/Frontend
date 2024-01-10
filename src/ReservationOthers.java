@@ -9,7 +9,7 @@ public class ReservationOthers extends JPanel implements ActionListener {
     private Main win;
     private JLabel reservationStatusLabel;
     private JLabel reservationAvailabilityLabel;
-    private JButton backButton;
+    private JButton backButton, homeButton;
 
     public ReservationOthers(String userName, Main win) {
         this.win = win;
@@ -21,13 +21,27 @@ public class ReservationOthers extends JPanel implements ActionListener {
         topPanel.setBorder(new EmptyBorder(10, 20, 10, 20));
         topPanel.setBackground(new Color(131, 86, 210)); // 보라색 배경
 
-        // 백 버튼
+        // 버튼 패널 (왼쪽애 백과 홈 모두 두기 위해)
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        buttonPanel.setOpaque(false);
+
+        // backbutton
         ImageIcon backIconOriginal = new ImageIcon(getClass().getResource("/images/back.png"));
         Image backImageScaled = backIconOriginal.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
         ImageIcon backIconScaled = new ImageIcon(backImageScaled);
         backButton = new JButton(backIconScaled);
         backButton.addActionListener(this);
-        topPanel.add(backButton, BorderLayout.WEST);
+        buttonPanel.add(backButton);
+
+        // homebutton
+        ImageIcon homeIconOriginal = new ImageIcon(getClass().getResource("/images/home.png"));
+        Image homeImageScaled = homeIconOriginal.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+        ImageIcon homeIconScaled = new ImageIcon(homeImageScaled);
+        homeButton = new JButton(homeIconScaled);
+        homeButton.addActionListener(this);
+        buttonPanel.add(homeButton);
+
+        topPanel.add(buttonPanel, BorderLayout.WEST);
 
         // 가운데 제목 라벨
         JLabel titleLabel = new JLabel("예약 페이지", SwingConstants.CENTER);
@@ -165,7 +179,9 @@ public class ReservationOthers extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == backButton) {
-            win.change("장비 선택 화면으로"); //selectequippanel
+            win.change("장비 선택 화면으로");
+        } else if (e.getSource() == homeButton) {
+            win.change("장비 선택 화면으로"); // 나중에 합치고 대여/문의 화면으로 돌아가게 만들기
         }
     }
 }
