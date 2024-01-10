@@ -54,8 +54,40 @@ public class SelectServicePanel extends JPanel implements ActionListener {
             win.change("장비 선택 화면으로");
         }
         else if (e.getSource() == inquiryBtn) {
+            JDialog dialog = new JDialog(win, "문의하기");
+            dialog.setLayout(new BorderLayout());
+            dialog.setSize(300, 330);
+
             ImageIcon qrCode = new ImageIcon(getClass().getResource("/resources/images/qrcode.png"));
-            JOptionPane.showMessageDialog(win, qrCode, "문의하기", JOptionPane.INFORMATION_MESSAGE);
+            JLabel qrCodeLabel = new JLabel(qrCode);
+            qrCodeLabel.setHorizontalAlignment(SwingConstants.CENTER);
+
+            JLabel timerLabel = new JLabel("15초 후에 자동으로 닫힙니다.", SwingConstants.CENTER);
+            timerLabel.setFont(new Font("SanSerif", Font.BOLD, 15));
+
+            dialog.add(qrCodeLabel, BorderLayout.CENTER);
+            dialog.add(timerLabel, BorderLayout.SOUTH);
+
+            Thread thread = new Thread(new Runnable() {
+                private int count = 15;
+
+                @Override
+                public void run() {
+                    while (count >= 0) {
+                        try {
+                            SwingUtilities.invokeLater(() -> timerLabel.setText(count + "초 후에 자동으로 닫힙니다."));
+                            Thread.sleep(1000); // 1초 대기
+                            count--;
+                        } catch (InterruptedException ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+                    dialog.dispose(); // 다이얼로그 닫기
+                }
+            });
+
+            thread.start(); // 쓰레드 시작
+            dialog.setVisible(true); // 다이얼로그 보여주기
         }
     }
 }
