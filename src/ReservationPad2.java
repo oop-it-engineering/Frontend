@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ReservationTablet extends JPanel implements ActionListener {
+public class ReservationPad2 extends JPanel implements ActionListener {
 
     private Main win;
     private JLabel reservationStatusLabel;
@@ -13,7 +13,7 @@ public class ReservationTablet extends JPanel implements ActionListener {
     //private JFrame previousFrame;
     private JButton backButton;
 
-    public ReservationTablet(String userName, Main win) {
+    public ReservationPad2(String userName, Main win) {
         this.win = win;
         setLayout(new BorderLayout(10, 10));
         setBackground(Color.WHITE);
@@ -50,13 +50,13 @@ public class ReservationTablet extends JPanel implements ActionListener {
         centerPanel.setBackground(Color.WHITE);
 
         // 제목 라벨 추가
-        JLabel deviceTitleLabel = new JLabel("갤럭시탭 s9");
+        JLabel deviceTitleLabel = new JLabel("아이패드 에어 4");
         deviceTitleLabel.setFont(new Font("Arial", Font.BOLD, 20));
         deviceTitleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         centerPanel.add(deviceTitleLabel);
 
         // tablet icon + 크기고정
-        ImageIcon tabletIconOriginal = new ImageIcon(getClass().getResource("/images/samsung_tablet.jpeg"));
+        ImageIcon tabletIconOriginal = new ImageIcon(getClass().getResource("/images/apple_tablet.png"));
         Image tabletImageScaled = tabletIconOriginal.getImage().getScaledInstance(400, 300, Image.SCALE_SMOOTH);
         ImageIcon tabletIconScaled = new ImageIcon(tabletImageScaled);
         JLabel tabletLabel = new JLabel(tabletIconScaled);

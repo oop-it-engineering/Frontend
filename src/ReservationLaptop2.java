@@ -62,7 +62,7 @@ public class ReservationLaptop2 extends JPanel implements ActionListener {
 
 
         // laptop icon + 크기고정
-        ImageIcon laptopIconOriginal = new ImageIcon(getClass().getResource("/images/lg_laptop.png"));
+        ImageIcon laptopIconOriginal = new ImageIcon(getClass().getResource("/images/lg_laptop.jpeg"));
         Image laptopImageScaled = laptopIconOriginal.getImage().getScaledInstance(400, 300, Image.SCALE_SMOOTH);
         ImageIcon laptopIconScaled = new ImageIcon(laptopImageScaled);
         JLabel laptopLabel = new JLabel(laptopIconScaled);
