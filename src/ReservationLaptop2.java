@@ -50,7 +50,7 @@ public class ReservationLaptop2 extends JPanel implements ActionListener {
         titleLabel.setForeground(Color.WHITE);
         topPanel.add(titleLabel, BorderLayout.CENTER);
 
-        // 눈송이님, 환영합니다1
+        // 눈송이님, 환영합니다!
         JLabel welcomeLabel = new JLabel(userName + "님, 환영합니다!", SwingConstants.RIGHT);
         welcomeLabel.setForeground(Color.WHITE);
         topPanel.add(welcomeLabel, BorderLayout.EAST);
