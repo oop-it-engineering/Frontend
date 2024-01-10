@@ -20,7 +20,7 @@ public class ListMobilePanel extends JPanel implements ActionListener {
         add(title);
 
         // 모바일 기기 목록 JList
-        String[] mobiles = {"갤럭시 s23", "아이폰 15", "갤럭시 a24"};
+        String[] mobiles = {"갤럭시 s23", "아이폰 15"};
         mobileList = new JList<>(mobiles);
         mobileList.setFont(new Font("SanSerif", Font.PLAIN, 16));
         JScrollPane scrollPane = new JScrollPane(mobileList);

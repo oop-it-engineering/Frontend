@@ -12,7 +12,7 @@ public class SelectEquipPanel extends JPanel implements ActionListener {
         setLayout(null);
         setBackground(new Color(255, 255, 255));
 
-        JLabel title = new JLabel("장비 선택");
+        JLabel title = new JLabel("기기 선택");
         title.setFont(new Font("SanSerif", Font.BOLD, 20));
         title.setBounds(150, 20, 200, 30);
         title.setHorizontalAlignment(JLabel.CENTER);

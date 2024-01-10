@@ -20,7 +20,7 @@ public class ListPadPanel extends JPanel implements ActionListener {
         add(title);
 
         // 패드 목록 JList
-        String[] pads = {"아이패드 에어 4", "갤럭시 탭 s9", "레노버 탭 m10"};
+        String[] pads = {"아이패드 에어 4", "갤럭시 탭 s9"};
         padList = new JList<>(pads);
         padList.setFont(new Font("SanSerif", Font.PLAIN, 16));
         JScrollPane scrollPane = new JScrollPane(padList);

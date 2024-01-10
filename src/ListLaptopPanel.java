@@ -20,7 +20,7 @@ public class ListLaptopPanel extends JPanel implements ActionListener {
         add(title);
 
         // 랩탑 목록 JList
-        String[] laptops = {"삼성 갤럭시 북 4", "LG 그램", "맥북 에어"};
+        String[] laptops = {"삼성 갤럭시 북 4", "LG 그램"};
         laptopList = new JList<>(laptops);
         laptopList.setFont(new Font("SanSerif", Font.PLAIN, 16));
         JScrollPane scrollPane = new JScrollPane(laptopList);

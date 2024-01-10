@@ -12,6 +12,12 @@ public class SelectServicePanel extends JPanel implements ActionListener {
         setLayout(null);
         setBackground(new Color(255, 255, 255));
 
+        JLabel title = new JLabel("HOME");
+        title.setFont(new Font("SanSerif", Font.BOLD, 20));
+        title.setBounds(100, 70, 300, 30);
+        title.setHorizontalAlignment(JLabel.CENTER);
+        add(title);
+
         rentBtn = new JButton("대여하기");
         rentBtn.setBounds(100, 120, 300, 50);
         rentBtn.addActionListener(this);
@@ -36,6 +42,7 @@ public class SelectServicePanel extends JPanel implements ActionListener {
         welcomeLabel.setFont(new Font("SanSerif", Font.BOLD, 10));
         welcomeLabel.setBounds(360, 20, 200, 30);
         add(welcomeLabel);
+
     }
 
     @Override
@@ -47,7 +54,8 @@ public class SelectServicePanel extends JPanel implements ActionListener {
             win.change("장비 선택 화면으로");
         }
         else if (e.getSource() == inquiryBtn) {
-            JOptionPane.showMessageDialog(win, "QR 코드", "문의하기", JOptionPane.INFORMATION_MESSAGE);
+            ImageIcon qrCode = new ImageIcon(getClass().getResource("/resources/images/qrcode.png"));
+            JOptionPane.showMessageDialog(win, qrCode, "문의하기", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 }

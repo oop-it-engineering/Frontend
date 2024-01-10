@@ -20,7 +20,7 @@ public class ListOtherPanel extends JPanel implements ActionListener {
         add(title);
 
         // 기타 기기 목록 JList
-        String[] others = {"아두이노 우노", "아두이노 나노", "라즈베리파이"};
+        String[] others = {"아두이노 우노"};
         otherList = new JList<>(others);
         otherList.setFont(new Font("SanSerif", Font.PLAIN, 16));
         JScrollPane scrollPane = new JScrollPane(otherList);
