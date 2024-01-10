@@ -2,21 +2,21 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class ReservationTablet extends JFrame {
+public class ReservationTablet extends JPanel implements ActionListener {
 
+    private Main win;
     private JLabel reservationStatusLabel;
     private JLabel reservationAvailabilityLabel;
-    private JFrame previousFrame;
+    //private JFrame previousFrame;
+    private JButton backButton;
 
-    public ReservationTablet(String userName, JFrame previousFrame) {
-        this.previousFrame = previousFrame;
-        setTitle("IT공학과 실습 기기 대여 시스템");
-        setSize(960, 768);
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        getContentPane().setBackground(Color.WHITE);
+    public ReservationTablet(String userName, Main win) {
+        this.win = win;
         setLayout(new BorderLayout(10, 10));
+        setBackground(Color.WHITE);
 
         // topPanel: 백 버튼, 제목, 눈송이님 포함
         JPanel topPanel = new JPanel(new BorderLayout());
@@ -27,13 +27,8 @@ public class ReservationTablet extends JFrame {
         ImageIcon backIconOriginal = new ImageIcon(getClass().getResource("/images/back.png"));
         Image backImageScaled = backIconOriginal.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
         ImageIcon backIconScaled = new ImageIcon(backImageScaled);
-        JButton backButton = new JButton(backIconScaled);
-        backButton.addActionListener(e -> {
-            if (previousFrame != null) {
-                previousFrame.setVisible(true);
-            }
-            this.dispose();
-        });
+        backButton = new JButton(backIconScaled);
+        backButton.addActionListener(this);
         topPanel.add(backButton, BorderLayout.WEST);
 
         // 가운데 제목 라벨
@@ -53,6 +48,12 @@ public class ReservationTablet extends JFrame {
         centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
         centerPanel.setBorder(new EmptyBorder(10, 20, 10, 20));
         centerPanel.setBackground(Color.WHITE);
+
+        // 제목 라벨 추가
+        JLabel deviceTitleLabel = new JLabel("갤럭시탭 s9");
+        deviceTitleLabel.setFont(new Font("Arial", Font.BOLD, 20));
+        deviceTitleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        centerPanel.add(deviceTitleLabel);
 
         // tablet icon + 크기고정
         ImageIcon tabletIconOriginal = new ImageIcon(getClass().getResource("/images/samsung_tablet.jpeg"));
@@ -82,7 +83,7 @@ public class ReservationTablet extends JFrame {
         bottomPanel.setBackground(Color.WHITE);
 
         // '규정 확인하기' -> 규정 확인 창으로 넘어가는 버튼
-        JButton reserveButton = new JButton("규정 확인하기");
+        JButton reserveButton = new JButton("예약하기");
         reserveButton.setPreferredSize(new Dimension(200, 50));
         styleButton(reserveButton, new Color(210, 86, 106));
         reserveButton.addActionListener(e -> showRulesDialog());
@@ -97,7 +98,8 @@ public class ReservationTablet extends JFrame {
 
     // 규정 확인하기 버튼 눌렀을 때 Rules Dialog 보여주는 메서드
     private void showRulesDialog() {
-        Rules dialog = new Rules(this);
+        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
+        Rules dialog = new Rules(frame);
         dialog.setVisible(true);
     }
 
@@ -160,5 +162,12 @@ public class ReservationTablet extends JFrame {
 
         reservationStatusLabel.setText(fetchedStatus);
         reservationAvailabilityLabel.setText(fetchedAvailability);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == backButton) {
+            win.change("장비 선택 화면으로");
+        }
     }
 }
