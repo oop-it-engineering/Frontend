@@ -157,7 +157,7 @@ public class ReservationLaptop extends JPanel implements ActionListener {
         reservationPanel.setBackground(new Color(255, 250, 205));
         reservationPanel.setMaximumSize(new Dimension(400, 70));
 
-        dateLabel = new JLabel("대여 날짜 선택: ");
+        dateLabel = new JLabel("대여 날짜 입력: ");
         reservationPanel.add(dateLabel);
 
         dateTextField = new HintTextField("YYYY-MM-DD"); // 힌트 텍스트 설정

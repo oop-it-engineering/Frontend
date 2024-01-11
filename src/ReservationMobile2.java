@@ -4,13 +4,15 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 
 public class ReservationMobile2 extends JPanel implements ActionListener {
 
     private Main win;
-    private JLabel reservationStatusLabel;
-    private JLabel reservationAvailabilityLabel;
-    //private JFrame previousFrame;
+    private JLabel remainingDeviceLabel;
+    private JLabel dateLabel;
+    private HintTextField dateTextField;
     private JButton backButton, homeButton;
 
     public ReservationMobile2(String userName, Main win) {
@@ -83,10 +85,10 @@ public class ReservationMobile2 extends JPanel implements ActionListener {
         centerPanel.add(Box.createVerticalStrut(20));
         centerPanel.add(infoPanel);
 
-        // 예약 상태 Panel
-        JPanel statusPanel = createStatusPanel(mobileIconScaled.getIconWidth());
+        // 예약 패널 생성
+        JPanel reservationPanel = createReservationPanel(mobileIconScaled.getIconWidth());
         centerPanel.add(Box.createVerticalStrut(20));
-        centerPanel.add(statusPanel);
+        centerPanel.add(reservationPanel);
 
         add(centerPanel, BorderLayout.CENTER);
 
@@ -106,8 +108,6 @@ public class ReservationMobile2 extends JPanel implements ActionListener {
         add(bottomPanel, BorderLayout.SOUTH);
 
         setVisible(true);
-        // 예약 상태 정보 백엔드와 연동 시 (일단 더미 데이터)
-        fetchData();
     }
 
     private void showRulesDialog() {
@@ -140,7 +140,7 @@ public class ReservationMobile2 extends JPanel implements ActionListener {
         infoTitleLabel.setFont(infoTitleLabel.getFont().deriveFont(Font.BOLD));
         infoPanel.add(infoTitleLabel);
 
-        String[] specs = {"OS: Android", "CPU: Snapdragon", "RAM: 8GB"};
+        String[] specs = {"OS: iOS", "CPU: Snapdragon", "RAM: 8GB"};
         for (String spec : specs) {
             JLabel label = new JLabel(spec, SwingConstants.CENTER);
             infoPanel.add(label);
@@ -148,33 +148,25 @@ public class ReservationMobile2 extends JPanel implements ActionListener {
         return infoPanel;
     }
 
-    // 예약 상태 패널 Detail
-    private JPanel createStatusPanel(int width) {
-        JPanel statusPanel = new JPanel();
-        statusPanel.setLayout(new GridLayout(3, 1, 0, 0));
-        statusPanel.setBorder(new LineBorder(Color.BLACK));
-        statusPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        statusPanel.setBackground(new Color(255, 250, 205));
-        statusPanel.setMaximumSize(new Dimension(width, 70));
+    // 예약 패널 생성
+    private JPanel createReservationPanel(int width) {
+        JPanel reservationPanel = new JPanel();
+        reservationPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
+        reservationPanel.setBorder(new LineBorder(Color.BLACK));
+        reservationPanel.setBackground(new Color(255, 250, 205));
+        reservationPanel.setMaximumSize(new Dimension(400, 70));
 
-        JLabel statusTitleLabel = new JLabel("예약 상태", SwingConstants.CENTER);
-        statusTitleLabel.setFont(statusTitleLabel.getFont().deriveFont(Font.BOLD));
-        statusPanel.add(statusTitleLabel);
+        dateLabel = new JLabel("대여 날짜 입력: ");
+        reservationPanel.add(dateLabel);
 
-        reservationStatusLabel = new JLabel("대여(39/40)", SwingConstants.CENTER);
-        reservationAvailabilityLabel = new JLabel("가능", SwingConstants.CENTER);
-        statusPanel.add(reservationStatusLabel);
-        statusPanel.add(reservationAvailabilityLabel);
-        return statusPanel;
-    }
+        dateTextField = new ReservationMobile2.HintTextField("YYYY-MM-DD"); // 힌트 텍스트 설정
+        reservationPanel.add(dateTextField);
 
-    // 데이터베이스에서 예약 정보를 가져오는 메서드
-    private void fetchData() {
-        String fetchedStatus = "대여(39/40)";
-        String fetchedAvailability = "가능";
+        // 남은 기기 수량 라벨
+        remainingDeviceLabel = new JLabel("남은 기기 수량: 10", SwingConstants.CENTER); // 예시 수량
+        reservationPanel.add(remainingDeviceLabel);
 
-        reservationStatusLabel.setText(fetchedStatus);
-        reservationAvailabilityLabel.setText(fetchedAvailability);
+        return reservationPanel;
     }
 
     @Override
@@ -182,7 +174,35 @@ public class ReservationMobile2 extends JPanel implements ActionListener {
         if (e.getSource() == backButton) {
             win.change("장비 선택 화면으로");
         } else if (e.getSource() == homeButton) {
-            win.change("장비 선택 화면으로"); // 나중에 합치고 대여/문의 화면으로 돌아가게 만들기
+            win.change("장비 선택 화면으로");
+        }
+    }
+
+    // HintTextField 클래스 정의 (힌트 텍스트를 가진 JTextField)
+    class HintTextField extends JTextField implements FocusListener {
+        private String hint;
+
+        public HintTextField(String hint) {
+            this.hint = hint;
+            addFocusListener(this);
+            setText(hint);
+            setForeground(Color.GRAY);
+        }
+
+        @Override
+        public void focusGained(FocusEvent e) {
+            if (getText().equals(hint)) {
+                setText("");
+                setForeground(Color.BLACK);
+            }
+        }
+
+        @Override
+        public void focusLost(FocusEvent e) {
+            if (getText().isEmpty()) {
+                setText(hint);
+                setForeground(Color.GRAY);
+            }
         }
     }
 }
